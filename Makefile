@@ -1,6 +1,15 @@
-all: compile run
+CC = gcc
+CFLAGS = -fdiagnostics-color=always -g -fsanitize=thread -O0 -Iinclude
+SRC = src/*.c
+TARGET = main
 
-compile:
-	gcc -fdiagnostics-color=always -g -fsanitize=thread -O0 main.c list.c UnboundedBlockingMPMCQueue.c StaticThreadPool.c -o main
-run:
-	./main
+all: $(TARGET) run
+
+$(TARGET): $(SRC)
+	$(CC) $(CFLAGS) $(SRC) -o $(TARGET)
+
+run: $(TARGET)
+	./$(TARGET)
+
+clean:
+	rm -f $(TARGET)
