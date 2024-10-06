@@ -54,4 +54,5 @@ void list_clear(List *list) {
         free(temp);
     }
     list->tail = NULL;
+    list->size = 0;
 }
